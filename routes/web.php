@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserController;
@@ -30,15 +31,9 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/login', [LoginController::class, 'login'])->name('login');
 });
 
-Route::get('email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect()->route('home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
+Route::get('email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->middleware(['auth', 'signed'])->name('verification.verify');
 
-Route::post('/email/verification-notification', function (Request $request) {
-   $request->user()->sendEmailVerificationNotification();
-   return back()->with('status', 'Ссылка для подтверждения отправлена');
-})->middleware('auth')->name('verification.send');
+Route::post('/email/verification-notification', [EmailVerificationController::class, 'verifyEmailSend'])->middleware('auth')->name('verification.send');
 
 
 Route::group(['middleware' => 'auth'], function () {

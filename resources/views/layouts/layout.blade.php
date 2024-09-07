@@ -35,29 +35,12 @@
 </svg>
 
 <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-    <header class="mb-auto">
-        <div>
-            <h3 class="float-md-start mb-0">Leads</h3>
-            <nav class="nav nav-masthead justify-content-center float-md-end">
-                <a class="nav-link fw-bold py-1 px-0 active" aria-current="page" href="{{ route('home')  }}">Главная</a>
-                @auth
-                    <a class="nav-link fw-bold py-1 px-0" href="{{ route('profile') }}">{{ auth()->user()->name }}</a>
-                    <a class="nav-link fw-bold py-1 px-0" href="{{ route('logout') }}">Выход</a>
-                @endauth
 
-                @guest()
-                    <a class="nav-link fw-bold py-1 px-0" href="{{ route('login.create') }}">Вход</a>
-                    <a class="nav-link fw-bold py-1 px-0" href="{{ route('register.create') }}">Регистрация</a>
-                @endguest
-            </nav>
-        </div>
-    </header>
+    @include('shared.header')
 
     @yield('content')
 
-    <footer class="mt-auto text-white-50">
-        <p>Cover template for <a href="https://getbootstrap.com/" class="text-white">Bootstrap</a>, by <a href="https://twitter.com/mdo" class="text-white">@mdo</a>.</p>
-    </footer>
+    @include('shared.footer')
 </div>
 <script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

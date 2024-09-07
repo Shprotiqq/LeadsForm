@@ -2,51 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\DTOs\User\LoggedDTO;
+use App\DTOs\User\RegisteredDTO;
+use App\Http\Requests\Login\StoreFormRequest;
+use App\Services\user\Authorization;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
-    public function loginForm()
+    public function loginForm(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
         return view('user.login');
-
     }
 
-    public function login(Request $request)
+    public function login(StoreFormRequest $request): RedirectResponse
     {
-
-        $rules = [
-            'email' => 'required|email',
-            'password' => 'required',
-        ];
-
-        $messages = [
-            'email.required' => 'Поле "e-mail" обязательно для заполнения',
-            'email.email' => 'Поле "e-mail" должно включать в себя почту',
-            'password.required' => 'Поле "пароль" обязательно для заполнения',
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages)->validate();
-
+        $dto = LoggedDTO::fromRequest($request);
         if (Auth::attempt([
-            'email' => $request->email,
-            'password' => $request->password,
+            'email' => $dto->email,
+            'password' => $dto->password,
         ])) {
             session()->flash('success', 'Вы успешно вошли');
-//            делать редирект на страницу со списком лидов
+///TODO делать редирект на страницу со списком лидов
             return redirect()->route('home');
         } return redirect()->back()->with('error', 'Неправильный логин или пароль');
-
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
-
         Auth::logout();
-        return redirect()->route('home');
 
+        return redirect()->route('home');
     }
 }

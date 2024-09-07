@@ -38,5 +38,6 @@
             <button type="submit" class="btn btn-primary">Отправить заявку</button>
         </form>
     </main>
+
 @endsection
 
