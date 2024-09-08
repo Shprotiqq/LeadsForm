@@ -24,6 +24,17 @@ class LeadService
         ]);
     }
 
+    public static function updated(LeadDTO $dto)
+    {
+        return Lead::query()->update([
+            'first_name' => $dto->first_name,
+            'last_name' => $dto->last_name,
+            'email' => $dto->email,
+            'phone_number' => $dto->phone_number,
+            'lead_text' => $dto->request
+        ]);
+    }
+
 }
 
 

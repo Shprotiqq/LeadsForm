@@ -31,7 +31,7 @@ class LeadController extends Controller
         $leads = Lead::query()->with('status')->get();
         $statuses = Status::all();
 
-        return view('user.statistics', compact('leads', 'statuses'));
+        return view('leads.statistics', compact('leads', 'statuses'));
     }
 
     public function statusUpdate(Lead $lead, Request $request): void
@@ -46,13 +46,29 @@ class LeadController extends Controller
 
     }
 
-    public function leadEdit()
+    public function leadEdit($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
+        $lead = new Lead;
 
+        return view('leads.edit', [
+            'lead' => $lead->query()->find($id)
+        ]);
     }
 
-    public function leadUpdate()
+    public function leadUpdate($id, StoreFromRequest $request): RedirectResponse
     {
+        $dto = LeadDTO::fromRequest($request);
 
+        Lead::query()->find($id)->update([
+            'first_name' => $dto->first_name,
+            'last_name' => $dto->last_name,
+            'email' => $dto->email,
+            'phone_number' => $dto->phone_number,
+            'lead_text' => $dto->request
+        ]);
+
+        session()->flash('success', 'Данные лида обновлена');
+
+        return redirect()->route('statistics');
     }
 }

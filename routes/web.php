@@ -48,5 +48,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/statistics', [LeadController::class, 'show'])->name('statistics');
     Route::patch('leads/{lead}/status-update', [LeadController::class, 'statusUpdate'])
         ->name('lead.status.update');
-    Route::get('statistics/{id}', [LeadController::class, 'leadEdit'])->name('lead.edit');
+    Route::get('statistics/{id}/update', [LeadController::class, 'leadEdit'])->name('lead.edit');
+    Route::post('statistics/{id}/update', [LeadController::class, 'leadUpdate'])->name('lead.update');
 });
