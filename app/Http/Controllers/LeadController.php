@@ -29,25 +29,21 @@ class LeadController extends Controller
     public function show(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
         $leads = Lead::query()->with('status')->get();
-
         $statuses = Status::all();
-
-
 
         return view('leads.statistics', compact('leads', 'statuses'));
     }
 
-    public function statusUpdate(Lead $lead, Request $request): RedirectResponse
+    public function statusUpdate(Lead $lead, Request $request): void
     {
         $lead->update([
             'status_id' => $request->status
         ]);
     }
 
-    public function leadDelete($id): RedirectResponse
+    public function leadDelete()
     {
-        Lead::query()->find($id)->delete();
-        return back();
+
     }
 
     public function leadEdit($id): View|Application|Factory|\Illuminate\Contracts\Foundation\Application

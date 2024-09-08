@@ -5,12 +5,9 @@
 @endsection
 
 @section('content')
-    <main class="px-3">
+    <main>
         <h2>Список лидов</h2>
-        <p>Всего лидов: {{ $leads->count() }}</p>
-        <p>Лидов со статусом "Новый": {{ $leads->where('status_id', '1')->count() }}</p>
-        <p>Лидов со статусом "В работе": {{ $leads->where('status_id', '2')->count() }}</p>
-        <p>Лидов со статусом "Завершен": {{ $leads->where('status_id', '3')->count() }}</p>
+
         <div class="row">
             @foreach($leads as $lead)
                 <div class="col-4">
@@ -28,7 +25,7 @@
                                 @endforeach
                             </select>
                             <a class="btn btn-primary" href="{{ route('lead.edit', $lead->id) }}">Редактировать</a>
-                            <a href="{{ route('lead.delete', $lead->id) }}" class="mt-2 btn btn-danger"
+                            <a href="#" class="mt-2 btn btn-danger"
                                onclick="confirm('Вы уверены что хотите удалить лид?')">
                                 Удалить
                             </a>
@@ -54,7 +51,7 @@
                         body: JSON.stringify({
                             __token: "{{ csrf_token() }}",
                             _method: "PATCH",
-                            status: status,
+                            status: status
                         })
                     });
                 });

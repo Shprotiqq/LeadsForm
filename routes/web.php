@@ -50,5 +50,4 @@ Route::group(['middleware' => 'auth'], function () {
         ->name('lead.status.update');
     Route::get('statistics/{id}/update', [LeadController::class, 'leadEdit'])->name('lead.edit');
     Route::post('statistics/{id}/update', [LeadController::class, 'leadUpdate'])->name('lead.update');
-    Route::get('statistics/{id}/delete', [LeadController::class, 'leadDelete'])->name('lead.delete');
 });
