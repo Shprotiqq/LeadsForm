@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\LeadController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ResetPasswordController;
@@ -29,13 +30,14 @@ Route::group(['middleware' => 'guest'], function () {
     Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
     Route::get('/login', [LoginController::class, 'loginForm'])->name('login.create');
     Route::post('/login', [LoginController::class, 'login'])->name('login');
-    Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.request');
-    Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email');
 });
 
-
+Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email');
 Route::get('/reset-password', [ResetPasswordController::class, 'create'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('password.update');
+
+Route::post('/', [LeadController::class, 'store'])->name('lead.store');
 
 
 

@@ -1,14 +1,9 @@
 @extends('layouts.layout')
 
 @section('content')
-    @if (session()->has('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
 
     <main class="px-3">
-        <form>
+        <form action="{{ route('lead.store') }}">
             <p>Создайте заявку прямо сейчас</p>
             <div class="mb-3">
                 <label for="first_name" class="form-label">Ваше имя</label>

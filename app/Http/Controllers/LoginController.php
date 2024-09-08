@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DTOs\User\LoggedDTO;
 use App\DTOs\User\RegisteredDTO;
 use App\Http\Requests\Login\StoreFormRequest;
-use App\Services\user\Authorization;
+use App\Services\User\AuthService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;

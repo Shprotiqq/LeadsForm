@@ -25,10 +25,12 @@ class ForgotPasswordController extends Controller
             $request->only('email')
         );
 
-        if ($status === Password::RESET_LINK_SENT) {
-            session()->flash('success', 'Вы успешно зарегистрировались');
+        if ($status === Password::RESET_LINK_SENT && auth()->guest()) {
+            session()->flash('success', 'Ссылка отправлена на почту');
             return redirect()->route('login.create');
-
+        } elseif ($status === Password::PASSWORD_RESET && auth()->user()) {
+            session()->flash('success', 'Ссылка отправлена на почту');
+            return redirect()->route('profile');
         }
 
         return back()

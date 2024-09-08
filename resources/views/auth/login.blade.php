@@ -4,15 +4,7 @@
 
     <main class="form-signin w-100 m-auto">
 
-        @if($errors->any())
-            <div class="alert alert-danger mt-5">
-                <ul class="list-unstyled">
-                    @foreach($errors->all() as $error)
-                        <li>{{$error}}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+
 
         @if(session()->has('error'))
                 <div class="alert alert-danger mt-5">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTOs\User\ResetPasswordDTO;
 use App\Http\Requests\password\ResetPasswordFormRequest;
+use App\Services\User\AuthService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -24,22 +25,16 @@ class ResetPasswordController extends Controller
     {
         $dto = ResetPasswordDTO::fromRequest($request);
 
-        $status = Password::reset([
-            'token' => $dto->token,
-            'email' => $dto->email,
-            'password' => $dto->password
-            ], function ($user) use ($dto) {
-                $user->forceFill([
-                    'password' => bcrypt($dto->password),
-                    'remember_token' => Str::random(60)
-                ])->save();
-            }
-        );
+        $status = AuthService::changePassword($dto);
 
-        if ($status === Password::PASSWORD_RESET) {
-            return redirect()->route('login.create')->with('status', trans($status));
+        if ($status === Password::PASSWORD_RESET && auth()->guest()) {
+            session()->flash('success', 'Пароль успешно изменен');
+            return redirect()->route('login.create');
+        } elseif ($status === Password::PASSWORD_RESET && auth()->user()) {
+            session()->flash('success', 'Пароль успешно изменен');
+            return redirect()->route('profile');
         }
 
-        return back()->withInput($dto->email)->withErrors(['email' => trans($status)]);
+        return back()->withInput(['email' => $dto->email])->withErrors(['email' => trans($status)]);
     }
 }

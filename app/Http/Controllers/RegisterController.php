@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTOs\User\RegisteredDTO;
 use App\Http\Requests\Register\StoreFormRequest;
-use App\Services\user\Authorization;
+use App\Services\User\AuthService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -18,16 +18,13 @@ class RegisterController extends Controller
 
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-
         return view('auth.register');
-
     }
 
     public function store(StoreFormRequest $request): RedirectResponse
     {
         $dto = RegisteredDTO::fromRequest($request);
-        $user = Authorization::registered($dto);
-
+        $user = AuthService::registered($dto);
 
         event(new Registered($user));
 
@@ -36,7 +33,6 @@ class RegisterController extends Controller
         Auth::login($user);
 
         return redirect()->route('home');
-
     }
 
 }

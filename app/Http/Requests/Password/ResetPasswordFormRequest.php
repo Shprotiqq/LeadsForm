@@ -12,7 +12,7 @@ class ResetPasswordFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->guest();
+        return true;
     }
 
     /**
@@ -24,7 +24,7 @@ class ResetPasswordFormRequest extends FormRequest
     {
         return [
             'token' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users',
             'password' => 'required|min:5|max:35|confirmed'
         ];
     }
