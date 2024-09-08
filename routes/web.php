@@ -46,4 +46,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
     Route::get('email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
     Route::post('/email/verification-notification', [EmailVerificationController::class, 'verifyEmailSend'])->name('verification.send');
+    Route::get('/statistics', [LeadController::class, 'show'])->name('statistics');
 });

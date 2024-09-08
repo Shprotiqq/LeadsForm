@@ -29,8 +29,7 @@ class LoginController extends Controller
             'password' => $dto->password,
         ])) {
             session()->flash('success', 'Вы успешно вошли');
-///TODO делать редирект на страницу со списком лидов
-            return redirect()->route('home');
+            return redirect()->route('statistics');
         } return redirect()->back()->with('error', 'Неправильный логин или пароль');
     }
 

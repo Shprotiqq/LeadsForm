@@ -3,7 +3,9 @@
 @section('content')
 
     <main class="px-3">
-        <form action="{{ route('lead.store') }}">
+        <form action="{{ route('lead.store') }}" method="POST">
+            @csrf
+
             <p>Создайте заявку прямо сейчас</p>
             <div class="mb-3">
                 <label for="first_name" class="form-label">Ваше имя</label>
@@ -16,8 +18,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="number" class="form-label">Ваше номер телефона</label>
-                <input type="tel" class="form-control" id="number" name="number">
+                <label for="phone_number" class="form-label">Ваше номер телефона</label>
+                <input type="tel" class="form-control" id="phone_number" name="phone_number">
             </div>
 
             <div class="mb-3">

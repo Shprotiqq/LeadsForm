@@ -16,8 +16,8 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->bigInteger('phone_number');
             $table->string('email');
-            $table->integer('phone_number');
             $table->text('lead_text');
             $table->string('status')->default(StatusEnum::NEW)->index();
             $table->timestamps();

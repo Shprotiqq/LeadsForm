@@ -9,8 +9,8 @@ class LeadDTO
     public function __construct(
         public readonly string $first_name,
         public readonly string $last_name,
-        public readonly int $number,
         public readonly string $email,
+        public readonly string $phone_number,
         public readonly string $request
     )
     {
@@ -23,8 +23,8 @@ class LeadDTO
         return new self(
             $requestData['first_name'],
             $requestData['last_name'],
-            $requestData['number'],
             $requestData['email'],
+            $requestData['phone_number'],
             $requestData['request']
         );
     }

@@ -12,7 +12,7 @@ class StoreFromRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->guest();
+        return true;
     }
 
     /**
@@ -25,9 +25,9 @@ class StoreFromRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'number' =>'required|int',
             'email' => 'required|email',
-            'request' => 'required|text'
+            'phone_number' => 'required|numeric',
+            'request' => 'required|string'
         ];
     }
 
@@ -36,10 +36,10 @@ class StoreFromRequest extends FormRequest
         return [
             'first_name.required' => 'Поле "Имя" обязательно для заполнения',
             'last_name.required' => 'Поле "Фамилия" обязательно для заполнения',
-            'number.required' => 'Поле "Номер телефона" обязательно для заполнения',
-            'number.int' =>'Поле "Номер телефона"должно состоять из цифр',
             'email.required' => 'Поле "e-mail" обязательно для заполнения',
             'email.email' => 'Поле "e-mail" должно включать в себя почту',
+            'phone_number.required' => 'Поле "Номер телефона" обязательно для заполнения',
+            'phone_number.numeric' =>'Поле "Номер телефона"должно состоять из цифр',
             'request.required' => 'Поле "Текст заявки" обязательно для заполнения',
         ];
     }
