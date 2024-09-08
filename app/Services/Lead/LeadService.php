@@ -4,6 +4,8 @@ namespace App\Services\Lead;
 
 use App\DTOs\Lead\LeadDTO;
 use App\Models\Lead;
+use App\Models\Status;
+use App\Services\Lead\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,7 +19,8 @@ class LeadService
             'last_name' => $dto->last_name,
             'email' => $dto->email,
             'phone_number' => $dto->phone_number,
-            'lead_text' => $dto->request
+            'lead_text' => $dto->request,
+            'status_id' => Status::query()->firstWhere('status', StatusEnum::NEW)->id
         ]);
     }
 

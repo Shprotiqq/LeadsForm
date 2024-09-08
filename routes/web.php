@@ -36,15 +36,17 @@ Route::get('/forgot-password', [ForgotPasswordController::class, 'create'])->nam
 Route::post('/forgot-password', [ForgotPasswordController::class, 'store'])->name('password.email');
 Route::get('/reset-password', [ResetPasswordController::class, 'create'])->name('password.reset');
 Route::post('/reset-password', [ResetPasswordController::class, 'store'])->name('password.update');
-
 Route::post('/', [LeadController::class, 'store'])->name('lead.store');
-
-
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/profile', [UserController::class, 'profile'])->name('profile');
-    Route::get('email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])->middleware(['signed'])->name('verification.verify');
-    Route::post('/email/verification-notification', [EmailVerificationController::class, 'verifyEmailSend'])->name('verification.send');
+    Route::get('email/verify/{id}/{hash}', [EmailVerificationController::class, 'verifyEmail'])
+        ->middleware(['signed'])->name('verification.verify');
+    Route::post('/email/verification-notification', [EmailVerificationController::class, 'verifyEmailSend'])
+        ->name('verification.send');
     Route::get('/statistics', [LeadController::class, 'show'])->name('statistics');
+    Route::patch('leads/{lead}/status-update', [LeadController::class, 'statusUpdate'])
+        ->name('lead.status.update');
+    Route::get('statistics/{id}', [LeadController::class, 'leadEdit'])->name('lead.edit');
 });

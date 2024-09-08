@@ -1,6 +1,6 @@
 <?php
 
-use App\Services\Lead\Enums\StatusEnum;
+use App\Models\Status;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,14 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('leads', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->bigInteger('phone_number');
-            $table->string('email');
-            $table->text('lead_text');
+            $table->string('status');
             $table->timestamps();
+        });
+
+        Schema::table('leads', function (Blueprint $table) {
+            $table->foreignIdFor(Status::class)
+                ->constrained()
+                ->cascadeOnUpdate()
+                ->cascadeOnDelete();
         });
     }
 
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('leads');
+        Schema::dropIfExists('statuses');
     }
 };
