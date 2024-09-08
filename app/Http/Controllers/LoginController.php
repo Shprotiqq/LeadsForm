@@ -18,7 +18,7 @@ class LoginController extends Controller
 {
     public function loginForm(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('user.login');
+        return view('auth.login');
     }
 
     public function login(StoreFormRequest $request): RedirectResponse

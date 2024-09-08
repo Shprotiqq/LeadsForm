@@ -12,7 +12,7 @@ class ForgotPasswordFormRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return auth()->check();
+        return auth()->guest();
     }
 
     /**
@@ -23,7 +23,15 @@ class ForgotPasswordFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'email']
+            'email' => 'required|email|string',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Поле "e-mail" обязательно для заполнения',
+            'email.email' => 'Поле "e-mail" должно включать в себя почту'
         ];
     }
 }

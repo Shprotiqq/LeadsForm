@@ -19,7 +19,7 @@ class RegisterController extends Controller
     public function create(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
     {
 
-        return view('user.register');
+        return view('auth.register');
 
     }
 

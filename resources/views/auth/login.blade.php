@@ -35,6 +35,8 @@
             <button class="btn btn-primary w-100 py-2 mt-3" type="submit">Войти</button>
         </form>
 
+        <a href="{{ route('password.request') }}"><button>Забыли пароль?</button></a>
+
 
     </main>
 

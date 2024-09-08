@@ -2,10 +2,12 @@
 
 namespace App\DTOs\User;
 
+use App\Http\Requests\password\ResetPasswordFormRequest;
+
 class ResetPasswordDTO
 {
     public function __construct(
-        public readonly int $id,
+        public readonly string $token,
         public readonly string $email,
         public readonly string $password
     )
@@ -17,7 +19,7 @@ class ResetPasswordDTO
         $requestData = $request->validated();
 
         return new self(
-            $requestData['id'],
+            $requestData['token'],
             $requestData['email'],
             $requestData['password']
         );

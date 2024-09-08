@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\password;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ResetPasswordFormRequest extends FormRequest
@@ -17,14 +18,26 @@ class ResetPasswordFormRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'id' => 'required',
+            'token' => 'required',
             'email' => 'required|email',
-            'password' => 'required|min:5|confirmed'
+            'password' => 'required|min:5|max:35|confirmed'
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'email.required' => 'Поле "e-mail" обязательно для заполнения',
+            'email.email' => 'Поле "e-mail" должно включать в себя почту',
+            'password.required' => 'Поле "пароль" обязательно для заполнения',
+            'password.confirmed' => 'Пароли должны совпадать',
+            'password.min' => 'Пароль должен содержать минмимум 5 символов',
+            'password.max' => 'Пароль должен содержать максимум 35 символов',
         ];
     }
 }
