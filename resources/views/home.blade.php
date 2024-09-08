@@ -1,7 +1,10 @@
 @extends('layouts.layout')
 
-@section('content')
+@section('title')
+    <title>Главная страница</title>
+@endsection
 
+@section('content')
     <main class="px-3">
         <form action="{{ route('lead.store') }}" method="POST">
             @csrf
@@ -35,6 +38,5 @@
             <button type="submit" class="btn btn-primary">Отправить заявку</button>
         </form>
     </main>
-
 @endsection
 

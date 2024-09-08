@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@section('title')
+    <title>Сброс пароля</title>
+@endsection
+
 @section('content')
 
     <main>

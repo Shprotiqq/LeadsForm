@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@section('title')
+    <title>Вход</title>
+@endsection
+
 @section('content')
 
     <main class="form-signin w-100 m-auto">
