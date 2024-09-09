@@ -32,13 +32,16 @@
 - PHP 8.1
 
 ## Инструкция для развертывания:
+- создать файл .env на основе .env.example
+- в строках .env файла указать свои MAIL_USERNAME и MAIL_PASSWORD которые генерирует mailtrap.io
 - composer install
 - composer dump autoload
 - php artisan storage:link
-- php artisan lang:publish
+- php artisan migrate --seed
 - npm install
 - npm run build
-- php artisan migrate --seed
 
 
-### Токен от mailtrap.io указан в .env.example
+### В качестве smtp сервиса был использован mailtrap.io
+
+
