@@ -8,6 +8,10 @@
     <main>
         <h2>Список лидов</h2>
 
+        <p>Всего лидов: {{ $leads->count() }}</p>
+        <p>Лидов со статусом "Новый": {{ $leads->where('status_id', 1)->count() }}</p>
+        <p>Лидов со статусом "В работе": {{ $leads->where('status_id', 2)->count() }}</p>
+        <p>Лидов со статусом "Завершен": {{ $leads->where('status_id', 3)->count() }}</p>
         <div class="row">
             @foreach($leads as $lead)
                 <div class="col-4">

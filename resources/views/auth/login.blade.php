@@ -6,11 +6,6 @@
 
 @section('content')
     <main class="form-signin w-100 m-auto">
-        @if(session()->has('error'))
-                <div class="alert alert-danger mt-5">
-                    {{ session('error') }}
-                </div>
-        @endif
         <form class="mt-3" action="{{ route('login') }}" method="POST">
             @csrf
 
@@ -25,6 +20,6 @@
             </div>
             <button class="btn btn-primary w-100 py-2 mt-3" type="submit">Войти</button>
         </form>
-        <a href="{{ route('password.request') }}"><button>Забыли пароль?</button></a>
+        <a class="btn btn-primary w-100 py-2 mt-3" href="{{ route('password.request') }}">Забыли пароль?</a>
     </main>
 @endsection
