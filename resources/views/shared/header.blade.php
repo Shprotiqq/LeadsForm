@@ -15,8 +15,10 @@
             @endauth
 
             @guest
-                <a class="nav-link fw-bold py-1 px-0" href="{{ route('login.create') }}">Вход</a>
-                <a class="nav-link fw-bold py-1 px-0" href="{{ route('register.create') }}">Регистрация</a>
+                <a class="nav-link fw-bold py-1 px-0 @if(request()->fullUrlIs(route('login.create'))) active @endif"
+                href="{{ route('login.create') }}">Вход</a>
+                <a class="nav-link fw-bold py-1 px-0 @if(request()->fullUrlIs(route('register.create'))) active @endif"
+                   href="{{ route('register.create') }}">Регистрация</a>
             @endguest
         </nav>
     </div>
